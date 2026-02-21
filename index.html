@@ -1182,7 +1182,7 @@
             /* section headers */
             h2 { font-size: 1.0rem; }
             .section-header { flex-direction: column; align-items: start; gap: 1rem; }
-            .view-all-btn { padding: 0.3rem 0.5rem; font-size: 0.6rem; }
+            .view-all-btn { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
 
             /* about section */
             .about-section {
@@ -1197,7 +1197,7 @@
             .about-content li { font-size: 0.6rem; }
 
             /* cards */
-            .info-card { width: 220px; min-width: 220px; padding: 0.9rem; }
+            .info-card { width: 220px; min-width: 220px; padding: 0.9rem; margin-bottom: 0.5rem; }
             .info-card h3 { font-size: 1.0rem; }
             .info-card p { font-size: 0.8rem; }
             .card-img { height: 150px; font-size: 2rem; }
@@ -1297,8 +1297,8 @@
     }
 
     .view-all-btn {
-        font-size: 0.55rem;
-        padding: 0.25rem 0.45rem;
+        font-size: 0.75rem;
+        padding: 0.2rem 0.45rem;
     }
 
     /* ---------- About Section ---------- */
@@ -1365,8 +1365,8 @@
 
     /* ---------- Buttons ---------- */
     .know-more {
-        font-size: 0.85rem;
-        padding: 0.4rem 0.7rem;
+        font-size: 0.65rem;
+        padding: 0.2rem 0.3rem;
     }
 
     /* ---------- Footer ---------- */
@@ -1552,94 +1552,83 @@
     <script>
         // Banner toggle
         const banner = document.getElementById('mainBanner');
-const bannerImg = document.getElementById('bannerImg');
-const bannerContact = document.getElementById('bannerContact');
+        const bannerImg = document.getElementById('bannerImg');
+        const bannerContact = document.getElementById('bannerContact');
 
-function isMobile() {
-    return window.matchMedia('(max-width: 400px)').matches;
-}
+        function isMobile() {
+            return window.matchMedia('(max-width: 400px)').matches;
+        }
 
-bannerImg.addEventListener('click', (e) => {
-    if (isMobile()) return;   // 🚫 stop on mobile
+        bannerImg.addEventListener('click', (e) => {
+            if (isMobile()) return;   // 🚫 stop on mobile
 
-    e.stopPropagation();
-    banner.classList.remove('expand-contact');
-    banner.classList.toggle('expand-image');
-});
+            e.stopPropagation();
+            banner.classList.remove('expand-contact');
+            banner.classList.toggle('expand-image');
+        });
 
-bannerContact.addEventListener('click', (e) => {
-    if (isMobile()) return;   // 🚫 stop on mobile
+        bannerContact.addEventListener('click', (e) => {
+            if (isMobile()) return;   // 🚫 stop on mobile
 
-    e.stopPropagation();
-    banner.classList.remove('expand-image');
-    banner.classList.toggle('expand-contact');
-});
+            e.stopPropagation();
+            banner.classList.remove('expand-image');
+            banner.classList.toggle('expand-contact');
+        });
 
-function isMobileView() {
-    return window.matchMedia('(max-width: 700px)').matches;
-}
+        function isMobileView() {
+            return window.matchMedia('(max-width: 700px)').matches;
+        }
 
-function setupInfiniteScroll(trackId) {
-    const track = document.getElementById(trackId);
-    if (!track) return;
+        function setupInfiniteScroll(trackId) {
+            const track = document.getElementById(trackId);
+            if (!track) return;
 
-    const items = Array.from(track.children);
-    if (items.length <= 3) return;
+            const items = Array.from(track.children);
+            if (items.length <= 3) return;
 
-    // Clone once
-    items.forEach(item => {
-        const clone = item.cloneNode(true);
-        clone.setAttribute('aria-hidden', 'true');
-        track.appendChild(clone);
-    });
+            // Clone items once
+            items.forEach(item => {
+                const clone = item.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                track.appendChild(clone);
+            });
 
-    /* ===== MOBILE BEHAVIOR ===== */
-    if (isMobileView()) {
-        track.style.animation = 'infiniteScroll 45s linear infinite';
+            /* ===== MOBILE ===== */
+            if (isMobileView()) {
+                track.style.animation = 'infiniteScroll 45s linear infinite';
 
-        let autoStopped = false;
+                let stopped = false;
 
-        const stopAutoScroll = () => {
-            if (autoStopped) return;
-            autoStopped = true;
+                const stopAutoScroll = () => {
+                    if (stopped) return;
+                    stopped = true;
 
-            // Stop animation only (DO NOT reset transform)
-            track.style.animationPlayState = 'paused';
+                    // 🔑 REMOVE animation completely
+                    track.style.animation = 'none';
 
-            // Allow native scroll
-            track.style.overflowX = 'auto';
-            track.style.scrollBehavior = 'smooth';
-        };
+                    // 🔑 ENABLE native scrolling
+                    track.style.overflowX = 'auto';
+                    track.style.scrollBehavior = 'smooth';
+                    track.style.touchAction = 'pan-x';
+                };
 
-        // Stop auto-scroll when user interacts
-        track.addEventListener('touchstart', stopAutoScroll, { passive: true });
-        track.addEventListener('touchmove', stopAutoScroll, { passive: true });
+                track.addEventListener('touchstart', stopAutoScroll, { passive: true });
+                track.addEventListener('touchmove', stopAutoScroll, { passive: true });
 
-        return;
-    }
+                return;
+            }
 
-    /* ===== DESKTOP BEHAVIOR ===== */
-    track.style.animation = 'infiniteScroll 45s linear infinite';
+            /* ===== DESKTOP ===== */
+            track.style.animation = 'infiniteScroll 45s linear infinite';
 
-    track.addEventListener('mouseenter', () =>
-        track.style.animationPlayState = 'paused'
-    );
-    track.addEventListener('mouseleave', () =>
-        track.style.animationPlayState = 'running'
-    );
-}
+            track.addEventListener('mouseenter', () => {
+                track.style.animationPlayState = 'paused';
+            });
 
-    /* ========== DESKTOP / TABLET ========== */
-    track.style.animation = 'infiniteScroll 45s linear infinite';
-
-    track.addEventListener('mouseenter', () => {
-        track.style.animationPlayState = 'paused';
-    });
-
-    track.addEventListener('mouseleave', () => {
-        track.style.animationPlayState = 'running';
-    });
-}
+            track.addEventListener('mouseleave', () => {
+                track.style.animationPlayState = 'running';
+            });
+        }
         ['servicesTrack','whyUsTrack','pressTrack','testimonialTrack','partnersTrack','contactsTrack','googleReviewTrack'].forEach(id => setupInfiniteScroll(id));
 
         // Smooth scroll
