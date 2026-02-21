@@ -871,6 +871,16 @@
         .info-card:hover:before {
             transform: translateX(0);
         }
+                @media (hover: hover) and (pointer: fine) {
+            .info-card:hover {
+                transform: translateY(-15px) scale(1.03);
+                box-shadow: var(--shadow-primary-2xl), 0 0 0 1px var(--primary);
+            }
+
+            .info-card:hover:before {
+                transform: translateX(0);
+            }
+        }
 
         .card-img {
             width: 100%;
@@ -1254,7 +1264,7 @@
         min-height: 260px;
         height: auto;
     }
-
+    .info-card { width: 220px; min-width: 220px; padding: 0.9rem; margin-bottom: 0.5rem; }
     .banner {
         flex-direction: column;
         gap: 0.6rem;
@@ -1379,18 +1389,19 @@
         padding-bottom: 60px;
     }
 }
-@media (max-width: 700px) {
-    .client-track {
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-    }
+        @media (max-width: 700px) {
+            .client-track {
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                touch-action: pan-x;
+            }
 
-    .client-item {
-        scroll-snap-align: start;
-        flex-shrink: 0;
-    }
-}
+            .client-item {
+                scroll-snap-align: start;
+                flex-shrink: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1525,7 +1536,12 @@
 
     <section class="centered-section" id="service"><div class="section-header"><h2>Services</h2><button class="view-all-btn">View All</button></div><div class="carousel-container"><div class="card-track" id="servicesTrack"><div class="info-card"><div class="card-img">💻</div><h3>Web Dev</h3><p>Modern responsive sites with cutting‑edge tech.</p><button class="know-more">Know more →</button></div><div class="info-card"><div class="card-img">📱</div><h3>Mobile Apps</h3><p>iOS & Android apps with exceptional UX.</p><button class="know-more">Know more →</button></div><div class="info-card"><div class="card-img">🎨</div><h3>UI/UX Design</h3><p>User‑centered, beautiful interfaces.</p><button class="know-more">Know more →</button></div><div class="info-card"><div class="card-img">📊</div><h3>Digital Marketing</h3><p>Data-driven strategies that grow business.</p><button class="know-more">Know more →</button></div><div class="info-card"><div class="card-img">💡</div><h3>Consulting</h3><p>Strategic advice to scale your product.</p><button class="know-more">Know more →</button></div></div></div></section>
 
-    <section class="centered-section"><div class="section-header"><h2>Why Us</h2><button class="view-all-btn">View All</button></div><div class="carousel-container"><div class="card-track" id="whyUsTrack"><div class="info-card"><div class="card-img">👥</div><h3>Expert Team</h3><p>Industry veterans with 10+ years experience.</p><button class="know-more">Know more →</button></div><div class="info-card"><div class="card-img">⚡</div><h3>Agile Process</h3><p>Fast iterations & transparent workflows.</p><button class="know-more">Know more →</button></div><div class="info-card"><div class="card-img">🕐</div><h3>24/7 Support</h3><p>We're here around the clock.</p><button class="know-more">Know more →</button></div><div class="info-card"><div class="card-img">💰</div><h3>Best Value</h3><p>Premium quality at competitive rates.</p><button class="know-more">Know more →</button></div></div></div></section>
+    <section class="centered-section">
+        <div class="section-header"><h2>Why Us</h2><button class="view-all-btn">View All</button></div>
+        <div class="carousel-container"><div class="card-track" id="whyUsTrack"><div class="info-card"><div class="card-img">👥</div><h3>Expert Team</h3><p>Industry veterans with 10+ years experience.</p><button class="know-more">Know more →</button></div>
+        <div class="info-card"><div class="card-img">⚡</div><h3>Agile Process</h3><p>Fast iterations & transparent workflows.</p><button class="know-more">Know more →</button></div>
+        <div class="info-card"><div class="card-img">🕐</div><h3>24/7 Support</h3><p>We're here around the clock.</p><button class="know-more">Know more →</button>
+    </div><div class="info-card"><div class="card-img">💰</div><h3>Best Value</h3><p>Premium quality at competitive rates.</p><button class="know-more">Know more →</button></div></div></div></section>
 
     <section class="centered-section" id="press"><div class="section-header"><h2>Press Release</h2><button class="view-all-btn">View All</button></div><div class="carousel-container"><div class="card-track" id="pressTrack"><div class="info-card"><div class="card-img">🏢</div><h3>New Office</h3><p>Berlin expansion milestone.</p><button class="know-more">Know more →</button></div><div class="info-card"><div class="card-img">🏆</div><h3>Award 2025</h3><p>Agency of the year.</p><button class="know-more">Know more →</button></div><div class="info-card"><div class="card-img">🤝</div><h3>Partnership</h3><p>Strategic alliance with TechCorp.</p><button class="know-more">Know more →</button></div></div></div></section>
 
@@ -1575,60 +1591,44 @@
             banner.classList.toggle('expand-contact');
         });
 
-        function isMobileView() {
-            return window.matchMedia('(max-width: 700px)').matches;
-        }
+            function isMobileView() {
+                return window.matchMedia('(max-width: 700px)').matches;
+            }
 
-        function setupInfiniteScroll(trackId) {
-            const track = document.getElementById(trackId);
-            if (!track) return;
+            function setupInfiniteScroll(trackId) {
+                const track = document.getElementById(trackId);
+                if (!track) return;
 
-            const items = Array.from(track.children);
-            if (items.length <= 3) return;
+                const items = Array.from(track.children);
+                if (items.length <= 3) return;
 
-            // Clone items once
-            items.forEach(item => {
-                const clone = item.cloneNode(true);
-                clone.setAttribute('aria-hidden', 'true');
-                track.appendChild(clone);
-            });
-
-            /* ===== MOBILE ===== */
-            if (isMobileView()) {
-                track.style.animation = 'infiniteScroll 45s linear infinite';
-
-                let stopped = false;
-
-                const stopAutoScroll = () => {
-                    if (stopped) return;
-                    stopped = true;
-
-                    // 🔑 REMOVE animation completely
+                /* ===== MOBILE ===== */
+                if (isMobileView()) {
+                    // ❌ NO animation on mobile
                     track.style.animation = 'none';
-
-                    // 🔑 ENABLE native scrolling
                     track.style.overflowX = 'auto';
                     track.style.scrollBehavior = 'smooth';
                     track.style.touchAction = 'pan-x';
-                };
+                    return;
+                }
 
-                track.addEventListener('touchstart', stopAutoScroll, { passive: true });
-                track.addEventListener('touchmove', stopAutoScroll, { passive: true });
+                /* ===== DESKTOP ===== */
+                items.forEach(item => {
+                    const clone = item.cloneNode(true);
+                    clone.setAttribute('aria-hidden', 'true');
+                    track.appendChild(clone);
+                });
 
-                return;
+                track.style.animation = 'infiniteScroll 45s linear infinite';
+
+                track.addEventListener('mouseenter', () => {
+                    track.style.animationPlayState = 'paused';
+                });
+
+                track.addEventListener('mouseleave', () => {
+                    track.style.animationPlayState = 'running';
+                });
             }
-
-            /* ===== DESKTOP ===== */
-            track.style.animation = 'infiniteScroll 45s linear infinite';
-
-            track.addEventListener('mouseenter', () => {
-                track.style.animationPlayState = 'paused';
-            });
-
-            track.addEventListener('mouseleave', () => {
-                track.style.animationPlayState = 'running';
-            });
-        }
         ['servicesTrack','whyUsTrack','pressTrack','testimonialTrack','partnersTrack','contactsTrack','googleReviewTrack'].forEach(id => setupInfiniteScroll(id));
 
         // Smooth scroll
