@@ -555,7 +555,7 @@
             font-size: 2.2rem;
             margin-bottom: 2rem;
             background: linear-gradient(135deg, #fff, var(--primary-light));
-            -webkit-background-clip: text;
+           
             -webkit-text-fill-color: transparent;
         }
 
@@ -654,120 +654,83 @@
             to { transform: translateX(-50%); }
         }
 
-        /* ---- Enhanced About Section ---- */
-        .about-section {
-            max-width: 78%;
-            margin: 80px auto;
-            display: flex;
-            gap: 4rem;
-            align-items: center;
-            background: white;
-            border-radius: var(--radius-2xl);
-            padding: 3rem;
-            box-shadow: var(--shadow-3xl), 0 0 0 1px var(--border);
-            position: relative;
-            overflow: hidden;
-            z-index: 0;
-        }
+                    /* ---- Enhanced About Section ---- */
+                    .about-section {
+                max-width: 78%;
+                margin: 80px auto;
+                display: flex;
+                gap: 4rem;
+                align-items: center;
+                background: white;
+                border-radius: 24px;
+                padding: 3rem;
+                box-shadow: 0 30px 80px rgba(0,0,0,0.1);
+            }
 
-        .about-section:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 0% 0%, rgba(249, 115, 22, 0.03), transparent 50%);
-            pointer-events: none;
-             z-index: -1; 
-        }
+            /* IMAGE CONTAINER */
+            .about-image {
+               flex: 1;
+                height: 420px;           /* ✅ REQUIRED */
+                border-radius: 20px;
+                overflow: hidden;
+            }
 
-        .about-image {
-            flex: 1.1;
-            background: var(--primary-gradient);
-            border-radius: var(--radius-xl);
-            height: 600px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-primary-2xl);
-            position: relative;
-            overflow: hidden;   /* ✅ keeps image inside radius */
-        }
-
-        /* ✅ TARGET IMG INSIDE .about-image */
+            /* IMAGE */
             .about-image img {
                 width: 100%;
                 height: 100%;
-                object-fit: cover;
+                object-fit: cover;       /* ✅ fills container */
                 object-position: center;
                 display: block;
-                position: relative;
-                z-index: 1; /* ✅ image above overlay */
             }
+                        
 
-            .about-image::before {
-                content: '';
-                position: absolute;
-                inset: -50%;
-                background: repeating-linear-gradient(
-                    45deg,
-                    rgba(255,255,255,0.1) 0px,
-                    rgba(255,255,255,0.1) 20px,
-                    transparent 20px,
-                    transparent 40px
-                );
-                animation: move1 30s linear infinite;
-                z-index: 0; /* ✅ behind image */
-                pointer-events: none;
-            }
+                    .about-content { flex: 1; }
 
-        .about-content { flex: 1; }
+                    .about-content h2 { margin-bottom: 2rem; }
 
-        .about-content h2 { margin-bottom: 2rem; }
+                    .about-content p {
+                        color: var(--gray);
+                        line-height: 1.8;
+                        margin-bottom: 1.5rem;
+                        font-size: 1.1rem;
+                    }
 
-        .about-content p {
-            color: var(--gray);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
+                    .about-content ul {
+                        list-style: none;
+                        margin: 2rem 0;
+                    }
 
-        .about-content ul {
-            list-style: none;
-            margin: 2rem 0;
-        }
+                    .about-content li {
+                        
+                        font-weight: 500;
+                        color: var(--dark);
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+                        padding: 0.5rem;
+                        border-radius: var(--radius-md);
+                        transition: var(--transition-base);
+                    }
 
-        .about-content li {
-            
-            font-weight: 500;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.5rem;
-            border-radius: var(--radius-md);
-            transition: var(--transition-base);
-        }
+                    .about-content li:hover {
+                        background: linear-gradient(90deg, rgba(249, 115, 22, 0.05), transparent);
+                        transform: translateX(5px);
+                    }
 
-        .about-content li:hover {
-            background: linear-gradient(90deg, rgba(249, 115, 22, 0.05), transparent);
-            transform: translateX(5px);
-        }
-
-        .about-content li:before {
-            content: "✓";
-            width: 28px;
-            height: 28px;
-            background: var(--primary-gradient);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-size: 1rem;
-            box-shadow: var(--shadow-primary-md);
-        }
+                    .about-content li:before {
+                        content: "✓";
+                        width: 28px;
+                        height: 28px;
+                        background: var(--primary-gradient);
+                        color: white;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        font-size: 1rem;
+                        box-shadow: var(--shadow-primary-md);
+                    }
 
         /* ---- Enhanced Centered Sections (Cards) ---- */
         .centered-section {
@@ -1183,9 +1146,9 @@
             .review-card { width: 300px; min-width: 300px; }
         }
 
-        .about-image { height: 150px;  font-size: 1.3rem; }
-            .about-content p { font-size: 0.8rem; }
-            .about-content li { font-size: 0.6rem; }
+        .about-image {   font-size: 1.3rem; }
+            .about-content p { font-size: 1.rem; }
+            .about-content li { font-size: 1.rem; }
 
             /* cards */
             .info-card { width: 220px; min-width: 220px; padding: 0.9rem; }
@@ -1279,6 +1242,9 @@
             body {
                 padding-bottom: 50px;
             }
+             .about-content p { font-size: 0.5rem; }
+            .about-content li { font-size: 0.5rem; }
+
         }
         @media (max-width: 400px) {
 
@@ -1352,7 +1318,7 @@
     }
 
     .about-content li {
-        font-size: 0.55rem;
+        font-size: 0.5rem;
     }
 
     /* ---------- Cards ---------- */
@@ -1413,19 +1379,16 @@
         padding-bottom: 60px;
     }
 }
-@media (max-width: 720px) {
-    .client-track,
-    .info-track,
-    .review-track {
+@media (max-width: 700px) {
+    .client-track {
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
     }
 
-    .client-item,
-    .info-card,
-    .review-card {
+    .client-item {
         scroll-snap-align: start;
+        flex-shrink: 0;
     }
 }
     </style>
@@ -1536,7 +1499,29 @@
         <div class="client-item">Name</div></div></div>
     </section>
 
-    <section class="about-section" id="about"><div class="about-image"><img src="https://www.ceotodaymagazine.com/wp-content/uploads/2025/02/iStock-1196912164.jpg" alt="Slide 3"></span></div><div class="about-content"><h2>About Us</h2><p>We are a passionate team dedicated to delivering exceptional digital experiences. Our mission is to help brands grow through innovation and creativity.</p><ul><li>10+ years of industry experience</li><li>500+ successful projects</li><li>Global client satisfaction</li></ul><p>We combine strategy, design, and technology to build products that users love.</p></div></section>
+    <section class="about-section" id="about">
+    <div class="about-image">
+        <img src="https://www.ceotodaymagazine.com/wp-content/uploads/2025/02/iStock-1196912164.jpg" alt="About image">
+    </div>
+
+    <div class="about-content">
+        <h2>About Us</h2>
+        <p>
+            We are a passionate team dedicated to delivering exceptional digital experiences.
+            Our mission is to help brands grow through innovation and creativity.
+        </p>
+
+        <ul>
+            <li>10+ years of industry experience</li>
+            <li>500+ successful projects</li>
+            <li>Global client satisfaction</li>
+        </ul>
+
+        <p>
+            We combine strategy, design, and technology to build products that users love.
+        </p>
+    </div>
+</section>
 
     <section class="centered-section" id="service"><div class="section-header"><h2>Services</h2><button class="view-all-btn">View All</button></div><div class="carousel-container"><div class="card-track" id="servicesTrack"><div class="info-card"><div class="card-img">💻</div><h3>Web Dev</h3><p>Modern responsive sites with cutting‑edge tech.</p><button class="know-more">Know more →</button></div><div class="info-card"><div class="card-img">📱</div><h3>Mobile Apps</h3><p>iOS & Android apps with exceptional UX.</p><button class="know-more">Know more →</button></div><div class="info-card"><div class="card-img">🎨</div><h3>UI/UX Design</h3><p>User‑centered, beautiful interfaces.</p><button class="know-more">Know more →</button></div><div class="info-card"><div class="card-img">📊</div><h3>Digital Marketing</h3><p>Data-driven strategies that grow business.</p><button class="know-more">Know more →</button></div><div class="info-card"><div class="card-img">💡</div><h3>Consulting</h3><p>Strategic advice to scale your product.</p><button class="know-more">Know more →</button></div></div></div></section>
 
@@ -1590,45 +1575,59 @@ bannerContact.addEventListener('click', (e) => {
     banner.classList.toggle('expand-contact');
 });
 
-        // Infinite scroll setup (unchanged)
-       function isMobileView() {
-    return window.matchMedia('(max-width: 720px)').matches;
+function isMobileView() {
+    return window.matchMedia('(max-width: 700px)').matches;
 }
-    function setupInfiniteScroll(trackId) {
+
+function setupInfiniteScroll(trackId) {
     const track = document.getElementById(trackId);
     if (!track) return;
 
     const items = Array.from(track.children);
-
     if (items.length <= 3) return;
 
-    // clone items (once)
+    // Clone once
     items.forEach(item => {
         const clone = item.cloneNode(true);
         clone.setAttribute('aria-hidden', 'true');
         track.appendChild(clone);
     });
 
-    /* ========== MOBILE BEHAVIOR ========== */
+    /* ===== MOBILE BEHAVIOR ===== */
     if (isMobileView()) {
         track.style.animation = 'infiniteScroll 45s linear infinite';
 
-        let touched = false;
+        let autoStopped = false;
 
-        const stopAnimation = () => {
-            if (touched) return;
-            touched = true;
+        const stopAutoScroll = () => {
+            if (autoStopped) return;
+            autoStopped = true;
 
-            track.style.animation = 'none';
-            track.style.transform = 'translateX(0)';
+            // Stop animation only (DO NOT reset transform)
+            track.style.animationPlayState = 'paused';
+
+            // Allow native scroll
+            track.style.overflowX = 'auto';
+            track.style.scrollBehavior = 'smooth';
         };
 
-        // stop on first touch
-        track.addEventListener('touchstart', stopAnimation, { passive: true });
-        track.addEventListener('touchmove', stopAnimation, { passive: true });
+        // Stop auto-scroll when user interacts
+        track.addEventListener('touchstart', stopAutoScroll, { passive: true });
+        track.addEventListener('touchmove', stopAutoScroll, { passive: true });
 
         return;
     }
+
+    /* ===== DESKTOP BEHAVIOR ===== */
+    track.style.animation = 'infiniteScroll 45s linear infinite';
+
+    track.addEventListener('mouseenter', () =>
+        track.style.animationPlayState = 'paused'
+    );
+    track.addEventListener('mouseleave', () =>
+        track.style.animationPlayState = 'running'
+    );
+}
 
     /* ========== DESKTOP / TABLET ========== */
     track.style.animation = 'infiniteScroll 45s linear infinite';
